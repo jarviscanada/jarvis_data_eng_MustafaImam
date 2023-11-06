@@ -24,19 +24,19 @@ disk_io=$(vmstat -d | awk '{print $10}' | tail -n1 | xargs)
 disk_available=$(df -BM / | tail -1 | awk '{print $4}')
 
 # Current time in `2019-11-26 14:40:19` UTC format
-timestamp=$(vmstat -t | awk 'NR==3 {print $18" "$19}')
+timestamp=$(vmstat -t | awk 'NR==3 {print $18" "$19}' | tail -n1)
 
 
 #disk_available=$(df --output=avail / | tail -1 | awk '{print $1}')
 
 # Subquery to find matching id in host_info table
-host_id="(SELECT id FROM host_info WHERE hostname='$hostname')";
+#host_id="(SELECT id FROM host_info WHERE hostname=$hostname)";
 
 # PSQL command: Inserts server usage data into host_usage table
 # Note: be careful with double and single quotes
 #insert_stmt="INSERT INTO host_usage(timestamp, ...) VALUES('$timestamp', #todo...."
-insert_stmt="INSERT INTO host_usage(timestamp, host_id, memory_free, cpu_idle, cpu_kernel, disk_io, disk_available)
-VALUES($timestamp, $host_id, $memory_free, $cpu_idle, $cpu_kernel, $disk_io, ${disk_available%M})"
+insert_stmt="INSERT INTO host_usage(\"timestamp\", host_id, memory_free, cpu_idle, cpu_kernel, disk_io, disk_available)
+VALUES('$timestamp', (SELECT id FROM host_info WHERE hostname='$hostname'), $memory_free, $cpu_idle, $cpu_kernel, $disk_io, ${disk_available%M})"
 # removed the M from disk_available to get only numeric value
 
 #set up env var for pql cmd
