@@ -1,91 +1,182 @@
-1.	Start a psql instance using psql_docker.sh
-cd script: ./psql_docker.sh start (to start the docker script, script files are in the script directory)
+# Introduction
+The LCA (Linux Cluster Administration) team at Jarvis is responsible for overseeing a cluster of 10 Linux CentOS 7 servers. Their primary objective is to develop a Minimum Viable Product (MVP) designed to capture and track the hardware specifications of each server. Additionally, the MVP will monitor and log real-time usage data of the Linux servers, ranging from CPU to memory usage. This information is stored in a PostgreSQL Relational Database Management System (RDBMS) to aid in future resource allocation decisions, such as whether to scale up or down the server count. The data plays a crucial role in generating reports that guide the optimization of underutilized servers by adding more software and applications, as well as in the decision-making process for procuring new servers to alleviate the strain on overworked ones. The project is built using Bash scripts for data collection on hardware and server usage, Docker for setting up the PostgreSQL RDBMS, and Git/GitHub for managing the versions of the code, thereby ensuring a streamlined process for both data management and development.
+ 
 
-2.	Create tables using ddl.sql
-Using the SQL command CREATE TABLE table-name I created two tables ? host_info and host_usage inside the ddl.sql file
+# Quick Start
+Use markdown code block for your quick-start commands
+- Start a psql instance using psql_docker.sh
+- Create tables using ddl.sql
+- Insert hardware specs data into the DB using host_info.sh
+- Insert hardware usage data into the DB using host_usage.sh
+- Crontab setup
 
-3.	Insert hardware specs data into the DB using host_info.sh
-Using this query: insert_stmt="INSERT INTO host_info (hostname, cpu_number, cpu_architecture, cpu_model, cpu_mhz, l2_cache, timestamp, total_mem) VALUES
-('$hostname', 0, '', '', 0, 0, now(), 0) ON CONFLICT (hostname) DO NOTHING RETURNING id;"
+**Start a PostgreSQL instance using `psql_docker.sh`:**
+This scripts initializes a Docker container with the Postgres image. It allows us to run a Postgres instance where we can add, remove, and manage our databases and its tables. 
+```
+To create the PostgreSQL docker container
+./scripts/psql_docker.sh create db_username db_password
+# Example 
+./scripts/psql_docker.sh create postgres password
+```
+**Create tables and use `ddl.sql` to define schema and populate the tables with sample data:**
+The ddl.sql script defines the structure of the host_agent database, and the two tables host_info and host_usage. The former stores hardware data and the latter stores hardware usage for the aforementioned hardware.  
+```
+-- connect to the psql instance
+psql -h localhost -U postgres -W
+-- create the host_agent database 
+postgres=# CREATE DATABASE host_agent; 
+-- connect to the new database
+postgres=# \c host_agent;
+-- disconnect to the new host_agent database
+postgres=# \q
 
-4.	Insert hardware usage data into the DB using host_usage.sh
-Using this query: insert_stmt="INSERT INTO host_usage(timestamp, host_id, memory_free, cpu_idle, cpu_kernel, disk_io, disk_available) VALUES
-('$timestamp', (SELECT id FROM host_info WHERE hostname='$hostname'), $memory_free, $cpu_idle, $cpu_kernel, $disk_io, $disk_available);"
+-- Execute ddl.sql script 
+psql -h localhost -U postgres -d host_agent -f sql/ddl.sql
+```
 
-5.	Crontab setup
-Using crontab -e we can edit the crontab configuration, this will open a text editor in which I wrote ***** followed by my script path ensuring my script runs
-every minute. After saving and exiting the text editor, new / modified cron job entries are stored in crontab?s configuration.
+** Insert a given hardware specification using `host_info.sh` OR insert one row of data into the host_info table:**
+Run this script on each server to collect hardware specifications. This script only needs to be executed once during installation. Each row represents one hardware's specification. 
+```
+# Script usage 
+bash scripts/host_info.sh psql_host psql_port db_name psql_user psql_password 
+# Example 
+bash scripts/host_info.sh localhost 5432 host_agent postgres password
+```
+**Collect hardware usage data using `host_usage.sh` OR insert multiple rows of ddata into the host_usage database table running `host_usage.sh` at different times:**
+This script collects real-time server usage data and inserts it into the database. It makes sense to insert data using a crontab (Next step) as we may want to collect usage data overtime. 
+```
+# Script usage 
+bash scripts/host_usage.sh psql_host psql_port db_name psql_user psql_password 
+# Example 
+bash scripts/host_usage.sh localhost 5432 host_agent postgres password
+```
+**Crontab implementation to automate collecting usage data:**
+Using the below crontab we are executing the `host_usage.sh` every minute (interrvals can be changed)
+```
+# edit crontab jobs
+bash> crontab -e
+
+# add this to crontab
+# make sure you are using the correct file location for your script
+* * * * * bash /home/centos/dev/jrvs/bootcamp/linux_sql/host_agent/scripts/host_usage.sh localhost 5432 host_agent postgres password 
+
+# list crontab jobs
+crontab -l
+```
+
+**Validate your result from the psql instance**
+```
+psql -h localhost -U postgres -W
+\l to list the dbs
+\c host_agent
+\dt to list he tables/relations
+> SELECT * FROM host_usage;
+\q to quit psql instance
+```
 
 # Implemenation
+This is best described by bullet points:
+- Initialized a PSQL environment using a Docker container using the psql_docker.sh script
+- Initialized a database called host_agent and insert 2 tables called host_info and host_usage into it. The schema for each of the tables is defined in the ddl.sql file
+- Inserted the hardware specific data into the host_info table using host_info.sh
+- Inserted the hardware usage data into the host_usage table using host_usage.sh and the crontab (Crontab automatically ran host_usage every minute)
 
-I had to develop a product that could record the specifications of my hardware, as well as the data about resource usage, and store it in a database. I read
-through all the relevant articles before beginning the project and organized my Github repository by making master, develop, release, and feature branches.  I set
-up Docker and used a PSQL image to create a container. I used the docker start-stop commands to see whether my container was operating properly. I created a
-psql_docker script because it was a bit tedious to type out docker commands every time. Thus, the container can be started or stopped simply by typing
-./scriptname start/stop.  After that, I installed Postgres and linked it to the psql instance using psql -h HOST_NAME -p 5432 -U USER_NAME -d DB_NAME-p command.
-I created a Host_agent database. After that, I created two tables in a ddl.sql file called host_info and host_usage to store my hardware specifications. Following
-the execution of the SQL file, I created the host_info and host_usage scripts, which contained code for entering hardware specs and resource usage data into
-databases, respectively. I started using crontab to deploy and automate the host_usage script after running the bash scripts. To edit the crontab configuration, I
-typed crontab -e. This prompted a text editor, where I wrote ***** and then my script path. After saving and closing the text editor, the modified or new cron job
-entries were saved in the crontab configuration.
 
+I began by establishing a Dockerized PostgreSQL environment using the psql_docker.sh script. Inside this Dockerized PostgreSQL environment, I created the host_agent database and defined its structure with the ddl.sql script, generating the host_info and host_usage tables. To automate harware and server usage data collection, I developed two Bash scripts: host_info.sh, responsible for gathering and inserting hardware specification data into the host_info table, and host_usage.sh, designed to continuously collect real-time server resource usage data, including CPU and memory, and insert it into the host_usage table. Finally, I configured crontab to automatically run the host_usage.sh script every minute, facilitating efficient data collection and regular reporting of server usage data.
 ## Architecture
-
-The image for architecture is saved to the `assets` directory, please refer to that.
+![Linux SQL Project Architecture Diagram](../assets/diagram.png)
 
 ## Scripts
+**Key scripts used in the project:**
 
-```bash
-1. psql_docker.sh
-This script simplifies the process of setting up and managing Postgresql db instances within a docker container.
+**`psql_docker.sh`:** 
 
-2. host_info.sh
-Connects to the PostgreSQL database server using the provided hostname, port, username, and password.
-Gathers system information (such as hostname, CPU details, memory usage, etc.) from the host where the script is executed.
-Insert this system information into the specified PostgreSQL database under the `host_agent` schema.
-Usage: Used for monitoring and collecting data from the host and storing that data in a central DB.
+This scripts initializes a Docker container giving us a PSQL instance to create databases and tables within it. 
+```
+# script usage ./scripts/psql_docker.sh start|stop|create [db_username][db_password]
+```
 
-3. host_usage.sh
-Connects to the PostgreSQL database server using the provided hostname, port, username, and password.
-Gathers system information (such as memory usage, CPU statistics, and disk usage) from the host where the script is executed.
-Insert this system information into the specified PostgreSQL database under the `host_agent` schema.
-Usage: Used for monitoring and collecting data from the host where it is executed and storing that data in a central DB. 
+**`host_info.sh`:** 
 
-4. Crontab
-Crontab is a time-based job scheduler in Unix-like operating systems. It allows users to schedule tasks and commands to run at specific times or intervals. 
-Usage: Used for automating recurring tasks and scheduled job execution.
+This script inserts the specification of the hardware this script is running on. One entry per server 
+
+```
+# Script usage 
+bash scripts/host_info.sh psql_host psql_port db_name psql_user psql_password 
+# Example 
+bash scripts/host_info.sh localhost 5432 host_agent postgres password
+```
+
+**`host_usage.sh`:** 
+
+This scripts inserts real-time hardware usage data everytime it is run. If this script runs every minute then we will get real-time data for every one of the minutes this script is run on. 
+
+```
+# Script usage 
+bash scripts/host_usage.sh psql_host psql_port db_name psql_user psql_password 
+# Example 
+bash scripts/host_usage.sh localhost 5432 host_agent postgres password
+```
+
+**`crontab`:** 
+
+This runs the host_usage.sh script every minute giving us real-time data of the hardware's usage 
+
+```
+crontab -l
+
+# validate your result from the psql instance
+psql -h localhost -U postgres -W
+\l to list the dbs
+\c host_agent
+\dt to list he tables/relations
+> SELECT * FROM host_usage;
+\q to quit psql instance
+```
+
 
 ## Database Modeling
-The image for database modeling is saved to the `assets` directory, please refer to that.
+**There are two main tables in the host_agent database:**
+
+**host_info Table:**
+The host_info table contains hardware specifications for each host. The following is the host_info table schema:
+
+
+| Column Name       | Data Type  | Constraints       | Description                                      |
+|-------------------|------------|-------------------|--------------------------------------------------|
+| id                | SERIAL     | PRIMARY KEY      | Unique auto-incremented identifier for each host|
+| hostname          | VARCHAR    | NOT NULL, UNIQUE | Unique string representing the hostname of the host|
+| cpu_number        | INT2       | NOT NULL          | Number of CPUs on the host                      |
+| cpu_architecture  | VARCHAR    | NOT NULL          | String describing the CPU architecture         |
+| cpu_model         | VARCHAR    | NOT NULL          | String specifying the CPU model                 |
+| cpu_mhz           | FLOAT8     | NOT NULL          | CPU clock speed in megahertz                    |
+| l2_cache          | INT4       | NOT NULL          | L2 cache size in bytes                          |
+| timestamp         | TIMESTAMP  |                   | Timestamp indicating when the data was collected (nullable)|
+| total_mem         | INT4       |                   | Total memory available on the host in bytes (nullable)|
+
+
+**host_usage Table:**
+The host_usage table records contains server usage information for each host. The following is the host_usage table schema:
+
+
+| Column Name     | Data Type | Constraints                    | Description                                      |
+|-----------------|-----------|--------------------------------|--------------------------------------------------|
+| timestamp       | TIMESTAMP | NOT NULL                       | Timestamp indicating when host usage data was recorded|
+| host_id         | SERIAL    | NOT NULL                       | Foreign key referencing `id` in `host_info` for host identification|
+| memory_free     | INT4      | NOT NULL                       | Amount of free memory in bytes                   |
+| cpu_idle        | INT2      | NOT NULL                       | Percentage of CPU idle time                     |
+| cpu_kernel      | INT2      | NOT NULL                       | Percentage of CPU kernel time                   |
+| disk_io         | INT4      | NOT NULL                       | Number of disk input/output operations          |
+| disk_available  | INT4      | NOT NULL                       | Amount of available disk space in bytes        |
 
 # Test
-
-To execute the host_info table: ./host_info.sh "localhost" 5432 "host_agent" "postgres" "password"
-To execute the host_usage table: bash ./host_usage.sh "localhost" 5432 "host_agent" "postgres" "password"
-To connect to the host_agent db in Postgres: psql -h localhost -U postgres -d host_agent
-To view the host_info table: SELECT * FROM host_info;
-To view the host_usage table: SELECT * FROM host_usage;
-
-As a result host info would give me the data about host specs whereas host usage will get me the updated information about the host_usage.
+- Multiple tests done manually 
+- Faulty test data was inserted 
 
 # Deployment
-
-I started using crontab to deploy and automate the host_usage script after running the bash scripts. To edit the crontab configuration, I typed crontab -e. This
-prompted a text editor, where I wrote ***** and then my script path. After saving and closing the text editor, the modified or new cron job entries were saved in
-the crontab configuration.
+In deploying the monitoring app, I set up Git repositories for source code management (using the Gitflow model), configured crontab for automated data collection, and provisioned the database using Docker
 
 # Improvements
-
-When I first started using GitHub, I thought that changing the names of my commits would update my commits. So, I used the rebase function, passed the commit ID,
-edited it, and used the git amend command. However, this resulted in an error saying that it was rejected. Afterward, I read through more documentation, changed
-the temporal state of my uncommitted changes using git stash, and then used git fetch origin to fetch the most recent change from my remote repository and finally
-merged it. As a result, my changes rolled back and the file that I deleted was also present in my folder so I had to delete the file, go through my scripts again
-verify if there were any conflicts, modify it, and commit in my GitHub repo were also recursive. This led me to understand that:
-
-1.	For each new feature I develop, I should make a new feature branch and merge it with the develop branch once everything functions without a hitch. This will
-help to prevent minor hiccups.
-2.	Since the goal of the project is to monitor resource usage we can use open-source alert tools like Zabbis and Nagios to send real-time alerts when predefined
-thresholds are reached.
-3.	I require additional practical experience with git concepts.
-
-
+- Extend the project to allow analytics for the data collected 
+- Implement alerts for under or over utilized resources 
+- Better security for the whole infrastructure
