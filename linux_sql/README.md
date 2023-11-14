@@ -3,14 +3,8 @@ The LCA (Linux Cluster Administration) team at Jarvis is responsible for oversee
  
 
 # Quick Start
-Use markdown code block for your quick-start commands
-- Start a psql instance using psql_docker.sh
-- Create tables using ddl.sql
-- Insert hardware specs data into the DB using host_info.sh
-- Insert hardware usage data into the DB using host_usage.sh
-- Crontab setup
 
-**Start a PostgreSQL instance using `psql_docker.sh`:**
+*eStart a PostgreSQL instance using `psql_docker.sh`:**
 This scripts initializes a Docker container with the Postgres image. It allows us to run a Postgres instance where we can add, remove, and manage our databases and its tables. 
 ```
 To create the PostgreSQL docker container
