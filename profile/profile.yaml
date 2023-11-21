@@ -94,7 +94,7 @@ professional_experience:
     duration: "August 2020 - April 2021"
     # The project description must start with an action verb (https://bit.ly/3guO98u)
     description: "I improved the customer success team's efficiency by 75% by using Python to automate crucial steps for creative data cleaning and data transformation in a Data-Driven SOW1. Alongside helping the team with the general configuration of their microservices and their Docker containers, I improved efficiency by 35% by conducting frequent data cleaning and establishing data cleaning pipelines on other miscellaneous projects." 
-  - title: "Data Engineer Intern"
+  - title: "Data Engineer"
     company: "Trufan (Now, Surf)"
     duration: "May 2020 - August 2020"
     description: "I reduced the time spent on the semi-weekly dashboard creation process by 70% using Python. I reduced payment page churn by 25% by implementing timed popups. This is when I went through the complete data science lifecycle. I cleaned and parsed the clickstream website data using Python, presented valuable insights to stakeholders using intuitive plots with Tableau, and then implemented the approved changes (timed popups). I used React to implement the timed popups."
@@ -107,7 +107,7 @@ education:
   - school_name: "University Of Toronto - St. George Campus"
     duration: "2017-2023"
     degree: "Honors Bachelor of Science"
-    department: " - Computer Science & Statistics"
+    department: "Computer Science & Statistics"
     # optional
     awards_achievements:
 
