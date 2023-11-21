@@ -1,141 +1,103 @@
 {
   "education": [
     {
-      "awards_achievements": [
-        "Scholarship",
-        "Dean's List (2015, 2016): Ut enim ad minim veniam",
-        "GPA: 3.8/4.0"
-      ],
-      "degree": "Bachelor of Applied Sciences",
-      "department": "Electrical and Computer Engineering",
-      "duration": "2012-2016",
-      "school_name": "XYZ university"
-    },
-    {
       "awards_achievements": null,
-      "degree": "Master of Engineering",
-      "department": "Electrical and Computer Engineering",
-      "duration": "2016-2018",
-      "school_name": "XYZ university"
+      "degree": "Bachelor of Science - Honors",
+      "department": "Arts and Science -  Computer Science, Statistics, and Mathematics",
+      "duration": "2012-2016",
+      "school_name": "University Of Toronto - St. George Campus"
     }
   ],
   "github_repo_root_url": "https://github.com/jarviscanada/jarvis_data_eng_demo",
   "highlighted_projects": [
     {
-      "description": "Suspendisse a tincidunt odio. Suspendisse posuere luctus aliquet. Quisque magna tellus, tempor vitae arcu sed, volutpat scelerisque lacus. Aliquam varius pulvinar dapibus. Ut a tincidunt sem. Aenean sollicitudin fringilla erat ut imperdiet. Phasellus fermentum, enim vitae laoreet elementum, eros nisl hendrerit lorem.",
-      "git_url": "https://github.com/jarviscanada/jarvis_profile_builder",
-      "name": "Web app for resturant"
+      "description": "I designed and implemented a full-stack custom web application using React and Django that allows users to host their properties and users to reserve properties for vacations for specific dates they are available during. The authentication and authorization was managed through the Django REST Framework and data was stored in the SQLite relational database. React-bootstrap was used for styling and modern React infrastructure related features and best practices such as Context and Outlet were used for front-end programming.",
+      "git_url": "https://github.com/msaimam98/Restify",
+      "name": "Restify"
     },
     {
-      "description": "Suspendisse a tincidunt odio. Suspendisse posuere luctus aliquet. Quisque magna tellus, tempor vitae arcu sed, volutpat scelerisque lacus. Aliquam varius pulvinar dapibus. Ut a tincidunt sem. Aenean sollicitudin fringilla erat ut imperdiet. Phasellus fermentum, enim vitae laoreet elementum, eros nisl hendrerit lorem.",
-      "git_url": null,
-      "name": "Machine Learning"
+      "description": "I designed and implemented an e-commerce store that allows users to browse products, add them to a shopping cart, and proceed to checkout. The front-end was styled using React-Bootstrap and miscellaneous CSS properties and structured using React. The AWS Serverless architecture was utilised for the backend. More specifically, APIs were coded using AWS API Gateway alongside Lambda functions, data was stored in a NoSQL DynamoDB, user authentication and authorization was managed using AWS Cognito with AWS Resource permissions managed using a mix of Bucket policies, IAM Users, and IAM Roles, and the project was hosted/deployed using S3 Buckets in tandem with AWS Cloudfront for global deployment. Git, Github, and Github Desktop was used for version control.",
+      "git_url": "https://github.com/msaimam98/FakeComm",
+      "name": "FakeEcomm"
+    },
+    {
+      "description": "I designed and created the architecture of a centralised logging system using Fluentd and Docker containers. Fluent-bit was used to receive + parse logs and send them to a Fluentd container, which in turn redirected the logs to a single-node Elasticsearch container. Logs were displayed in a user-friendly environment using Elasticsearch and Kibana for further data analysis.",
+      "git_url": "https://github.com/msaimam98/Monitoring-Stack",
+      "name": "Monitoring Stack"
     }
   ],
   "jarvis_projects": [
     {
-      "description": "Suspendisse a tincidunt odio. Suspendisse posuere luctus aliquet. Quisque magna tellus, tempor vitae arcu sed, volutpat scelerisque lacus. Aliquam varius pulvinar dapibus. Ut a tincidunt sem. Aenean sollicitudin fringilla erat ut imperdiet. Phasellus fermentum, enim vitae laoreet elementum, eros nisl hendrerit lorem.",
-      "git_url": "/linux_sql",
+      "description": "Built an MVP for the LCA team that manages a Linux CentOS 7 cluster of multiple servers. This project monitors and records the Linux server usage data for any given machine, storing the data in a PostgreSQL RDBMS database. Although meant to aggregate hardware usage data for further analytics and future resource planning, this project also records and stores hardware specifications. Here, I developed bash scripts that initialise a PostgreSQL database using Docker containers, record the hardware specifications of the machine this project is run on in tables within the aforementioned database, and record per-minute hardware usage data using a crontab. Git, Github, and the Gitflow version control model were used for version control. I configured the crontab to run the host_usage.sh bash script per minute automating data collection for further analysis",
+      "git_url": "https://github.com/jarviscanada/jarvis_data_eng_MustafaImam/tree/master/linux_sql",
       "name": "Cluster Monitor"
-    },
-    {
-      "description": [
-        "Twitter App: Curabitur laoreet tristique leo, eget suscipit nisi. Sed in sodales ex. Maecenas vitae tincidunt dui, et eleifend quam.",
-        "JDBC App: Curabitur laoreet tristique leo, eget suscipit nisi. Sed in sodales ex. Maecenas vitae tincidunt dui, et eleifend quam.",
-        "Grep App: Curabitur laoreet tristique leo, eget suscipit nisi. Sed in sodales ex. Maecenas vitae tincidunt dui, et eleifend quam."
-      ],
-      "git_url": "/core_java",
-      "name": "Core Java Apps"
-    },
-    {
-      "description": "",
-      "git_url": "/springboot",
-      "name": "Springboot App"
-    },
-    {
-      "description": "",
-      "git_url": "/python_data_anlytics",
-      "name": "Python Data Analytics"
-    },
-    {
-      "description": "",
-      "git_url": "/hadoop",
-      "name": "Hadoop"
-    },
-    {
-      "description": "",
-      "git_url": "/spark",
-      "name": "Spark"
-    },
-    {
-      "description": "",
-      "git_url": "/cloud_devops",
-      "name": "Cloud/DevOps"
     }
   ],
   "name": "Mustafa Imam",
   "others": [
     {
       "bullets": [
-        "Udacity Machine Learning (2019)"
+        "AWS Cloud Practitioner Certificate"
       ],
       "title": "Certificates"
     },
     {
       "bullets": [
-        "Winner"
-      ],
-      "title": "Awards"
-    },
-    {
-      "bullets": [
-        "Basketball player",
-        "Competitive gaming",
-        "Volunteer, ABC Food bank: Ut enim ad minim veniam"
+        "Competitive Table-tennis player",
+        "Avid Badminton enthusiast",
+        "Hobbyist painter"
       ],
       "title": "Activities/Hobbies"
     }
   ],
   "professional_experience": [
     {
-      "company": "Jarvis",
-      "description": "Donec mattis sed justo et sagittis. Vestibulum lacinia nulla ipsum. Curabitur imperdiet nibh vitae leo lacinia laoreet. Nullam accumsan, lectus ut maximus ultricies, augue justo egestas mi, vel bibendum felis.",
-      "duration": "2020-present",
-      "title": "Software Developer"
+      "company": "Trufan (Now, Surf)",
+      "description": "I improved the Customer Success team's efficiency by 75% ( Saved ~15 hours of total work) by using Python to automate crucial steps for creative data cleaning and data transformation in a Data-Driven SOW1. Alongside helping the team with the general configuration of their microservices and their Docker containers, I improved efficiency by 35% by conducting frequent data cleaning and establishing data cleaning pipelines.",
+      "duration": "August 2020 - April 2021",
+      "title": "Data Science Intern"
     },
     {
-      "company": "XYZ Company",
-      "description": "Donec mattis sed justo et sagittis. Vestibulum lacinia nulla ipsum. Curabitur imperdiet nibh vitae leo lacinia laoreet. Nullam accumsan, lectus ut maximus ultricies, augue justo egestas mi, vel bibendum felis.",
-      "duration": "2019",
-      "title": "Tutor"
+      "company": "Trufan (Now, Surf)",
+      "description": "I improved efficiency by 70% by automating the Semi-Weekly Dashboard creation process using Python. I reduced payment page churn by 25% by implementing timed popups. This is when I went through the complete data science lifecycle. I cleaned and parsed the Clickstream Website Data using Python, presented valuable insights to stakeholders using intuitive plots with Tableau, and then implemented the approved changes (Timed Popups). I used React to implement the timed popups.",
+      "duration": "May 2020 - August 2020",
+      "title": "Data Science Intern"
     }
   ],
   "skills": {
     "competent": [
-      "Django",
-      "ReactJS",
-      "AWS",
+      "RDBMS/SQL",
+      "Postgres",
       "HTML/CSS",
-      "SQL",
-      "R"
+      "R",
+      "Tableau",
+      "Pandas",
+      "Apache Airflow",
+      "Scikit-learn",
+      "Numpy",
+      "TensorFlow",
+      "PyTorch",
+      "GCP"
     ],
     "familiar": [
-      "Donec",
-      "fermentum",
-      "fermentum",
-      "fermentum",
-      "fermentum"
+      "Azure Cloud",
+      "Microsoft Excel",
+      "Microsoft Word",
+      "Jenkins",
+      "C"
     ],
     "proficient": [
       "Java",
+      "Django",
       "Linux/Bash",
       "Python",
       "Docker",
+      "ReactJS",
       "Javascript",
-      "RDBMS/SQL",
+      "AWS",
       "Agile/Scrum",
       "Git"
     ]
   },
-  "summary": "I am a recent graduate from the University of Toronto with a Bachelor Of Science in Computer Science and Statistics."
+  "summary": "I am a recent graduate from the University of Toronto with a Bachelor Of Science in Computer Science and Statistics. With 1.5 years worth of experience as a Data Scientist and Software, I was privileged enough to get the opportunity to hone my technical and soft skills in a professional environment. Apart from the work experience, I have multiple Full-Stack projects under my belt that describe my proficiency in Django, React, Python, Javascript, and AWS specifically. More details can be found below."
 }
