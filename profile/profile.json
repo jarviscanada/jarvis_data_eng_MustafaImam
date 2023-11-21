@@ -16,7 +16,7 @@
       "name": "Restify"
     },
     {
-      "description": "I designed and implemented an e-commerce store that allows users to browse products, add them to a shopping cart, and proceed to checkout. The front-end was styled using React-Bootstrap and miscellaneous CSS properties and structured using React. The AWS Serverless architecture was utilised for the backend. More specifically, APIs were coded using AWS API Gateway alongside Lambda functions, data was stored in a NoSQL DynamoDB, user authentication and authorization was managed using AWS Cognito with AWS Resource permissions managed using a mix of Bucket policies, IAM Users, and IAM Roles, and the project was hosted/deployed using S3 Buckets in tandem with AWS Cloudfront for global deployment. Git, Github, and Github Desktop was used for version control.",
+      "description": "I designed and implemented an e-commerce store that allows users to browse products, add them to a shopping cart, and proceed to checkout. The front-end was styled using React-Bootstrap and miscellaneous CSS properties and structured using React. The AWS Serverless architecture was utilised for the backend. More specifically, APIs were coded using AWS API Gateway alongside Lambda functions, data was stored in a NoSQL DynamoDB, user authentication and authorization was managed using AWS Cognito with AWS Resource permissions managed using a mix of Bucket policies, IAM Users, and IAM Roles, and the project was hosted/deployed using S3 Buckets in tandem with AWS Cloudfront for global deployment. Git, Github, and Github Desktop were used for version control.",
       "git_url": "https://github.com/msaimam98/FakeComm",
       "name": "FakeEcomm"
     },
