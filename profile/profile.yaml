@@ -106,8 +106,8 @@ professional_experience:
 education: 
   - school_name: "University Of Toronto - St. George Campus"
     duration: "2017-2023"
-    degree: "Honors Bachelor of Science - Computer Science & Statistics"
-    department: ""
+    degree: "Honors Bachelor of Science"
+    department: " - Computer Science & Statistics"
     # optional
     awards_achievements:
 
