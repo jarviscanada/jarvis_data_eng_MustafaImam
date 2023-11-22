@@ -1,0 +1,124 @@
+# Preferred name (Characters only)
+name: "Mustafa Imam"
+# Your GitHub repo root URL
+github_repo_root_url: https://github.com/jarviscanada/jarvis_data_eng_demo
+
+# Introduce yourself, your academic and professional background.
+# What excites you about the software industry and your passion. At least 80 words
+summary: "I am a recent graduate from the University of Toronto with a Bachelor Of Science in Computer Science and Statistics. With 1.5 years worth of experience as a data and software engineer, at Trufan and Afiniti working with Python, React, Docker containers, and Apache Airflow. I was privileged enough to get the opportunity to hone my technical and soft skills in a professional environment. I also have multiple Full-Stack projects under my belt that demonstrate my proficiency in Django, React, Python, Javascript, and AWS specifically. I am super passionate about backend development and cloud computing, and recently acquired my AWS Cloud Practitioner Certification. " 
+# Group your skills by level.
+# Your skills can be anything software related (e.g. language, frameworks, methodologies, software, etc.).
+skills:
+  # At least 5 skills
+  proficient:
+    - Java
+    - Django
+    - Linux/Bash
+    - Python
+    - Docker
+    - ReactJS
+    - Javascript
+    - AWS
+    - Agile/Scrum
+    - Git
+  # At least 5 skills
+  competent:
+    - RDBMS/SQL
+    - Postgres
+    - HTML/CSS
+    - R
+    - Tableau
+    - Pandas
+    - Numpy
+    - TensorFlow
+    - GCP
+  # At least 5 skills
+  familiar:
+    - Azure Cloud
+    - PyTorch
+    - C
+    - Scikit-learn 
+    - Apache Airflow 
+
+# List of Jarvis projects
+jarvis_projects:
+  - name: "Cluster Monitor"
+    git_url: "https://github.com/jarviscanada/jarvis_data_eng_MustafaImam/tree/master/linux_sql"
+    # The project description allows hiring managers to understand your project and technologies you used(e.g. programming languages, libraries, algorithms, hardware, tools, etc.).
+    # The project description must start with an action verb (https://bit.ly/3guO98u)
+    description: "Built an MVP for the LCA (Linux Cluster Administration) team that manages a Linux CentOS 7 cluster of multiple servers. This project uses bash scripts to monitor and record the Linux server usage and hardware data in a Dockerized PostgreSQL database for analytics and future resource planning.I automated recording per-minute hardware usage data using a crontab. Git, Github, and the Gitflow version control model were used for version control. "
+  # - name: "Core Java Apps"
+  #   git_url: "/core_java"
+  #   description:
+  #     - "Twitter App: Curabitur laoreet tristique leo, eget suscipit nisi. Sed in sodales ex. Maecenas vitae tincidunt dui, et eleifend quam."
+  #     - "JDBC App: Curabitur laoreet tristique leo, eget suscipit nisi. Sed in sodales ex. Maecenas vitae tincidunt dui, et eleifend quam."
+  #     - "Grep App: Curabitur laoreet tristique leo, eget suscipit nisi. Sed in sodales ex. Maecenas vitae tincidunt dui, et eleifend quam."
+  # - name: "Springboot App"
+  #   git_url: "/springboot"
+  #   description: ""
+  # - name: "Python Data Analytics"
+  #   git_url: "/python_data_anlytics"
+  #   description: ""
+  # - name: "Hadoop"
+  #   git_url: "/hadoop"
+  #   description: ""
+  # - name: "Spark"
+  #   git_url: "/spark"
+  #   description: ""
+  # - name: "Cloud/DevOps"
+  #   git_url: "/cloud_devops"
+  #   description: ""
+
+# List of personal or academic projects
+# Feel free to add more projects
+highlighted_projects:
+    #project name
+  - name: "Restify"
+    #URL is optional
+    git_url: "https://github.com/msaimam98/Restify"
+    # The project description must start with an action verb (https://bit.ly/3guO98u)
+    description: "I designed and implemented a full-stack custom web application using React and Django that allows users to host and reserve real-estate properties on specific dates. The authentication and authorization was managed through the Django REST Framework and data was stored in the SQLite relational database. React-bootstrap was used for styling and modern React infrastructure related features and best practices such as Context and Outlet were used for front-end programming."
+  - name: "FakeEcomm"
+    git_url: "https://github.com/msaimam98/FakeComm"
+    description: "I designed and implemented an e-commerce store that allows users to browse products, add them to a shopping cart, and proceed to checkout. The front-end was styled using React-Bootstrap and miscellaneous CSS properties and structured using React. The AWS Serverless architecture was utilised for the backend. More specifically, APIs were coded using AWS API Gateway alongside Lambda functions. Data was stored in a NoSQL DynamoDB. User authentication and authorization was managed using AWS Cognito, and AWS Resource permissions managed using a mix of Bucket policies, IAM Users, and IAM Roles. The project was hosted/deployed using S3 Buckets in tandem with AWS Cloudfront for global deployment. Git, Github, and Github Desktop were used for version control."
+  - name: "Monitoring Stack"
+    git_url: "https://github.com/msaimam98/Monitoring-Stack"
+    description: "I designed and created the architecture of a centralised logging system using Fluentd and Docker containers. Fluent-bit was used to receive and parse logs and send them to a Fluentd container, which in turn redirected the logs to a single-node Elasticsearch container. Logs were displayed in a user-friendly environment using Elasticsearch and Kibana for further data analysis"
+#List of professional experience
+#The job description allows hiring managers to understand your job and the technologies you used(e.g. programming languages, libraries, algorithms, hardware, tools, etc.).
+#The description must be more than 25 words. If your experience is not software related, please focus on soft skills and achievements (e.g. team collaboration, problem-solving, improvements, communication).
+professional_experience:
+  #Write your Jarvis role as a professional experience rather than training.
+  - title: "Data Science Intern"
+    company: "Trufan (Now, Surf)"
+    duration: "August 2020 - April 2021"
+    # The project description must start with an action verb (https://bit.ly/3guO98u)
+    description: "I improved the customer success team's efficiency by 75% by using Python to automate crucial steps for creative data cleaning and data transformation in a Data-Driven SOW1. Alongside helping the team with the general configuration of their microservices and their Docker containers, I improved efficiency by 35% by conducting frequent data cleaning and establishing data cleaning pipelines on other miscellaneous projects." 
+  - title: "Data Engineer"
+    company: "Trufan (Now, Surf)"
+    duration: "May 2020 - August 2020"
+    description: "I reduced the time spent on the semi-weekly dashboard creation process by 70% using Python. I reduced payment page churn by 25% by implementing timed popups. This is when I went through the complete data science lifecycle. I cleaned and parsed the clickstream website data using Python, presented valuable insights to stakeholders using intuitive plots with Tableau, and then implemented the approved changes (timed popups). I used React to implement the timed popups."
+  # - title: "Software Engineer Intern"
+  #   company: "Afiniti"
+  #   duration: "June 2019 - August 2019"
+  #   description: ""
+#List of edcuation
+education: 
+  - school_name: "University Of Toronto - St. George Campus"
+    duration: "2017-2023"
+    degree: "Honors Bachelor of Science"
+    department: "Computer Science & Statistics"
+    # optional
+    awards_achievements:
+
+#Optional section
+others:
+    #category
+  - title: "Certificates"
+    #list of items
+    bullets:
+      - "AWS Cloud Practitioner Certificate"
+  - title: "Activities/Hobbies"
+    bullets:
+      - "Competitive Table-tennis player"
+      - "Avid badminton enthusiast"
