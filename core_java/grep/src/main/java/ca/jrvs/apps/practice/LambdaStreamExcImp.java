@@ -1,6 +1,6 @@
 package ca.jrvs.apps.practice;
 
-import sun.lwawt.macosx.CInputMethod;
+//import sun.lwawt.macosx.CInputMethod;
 
 import java.util.ArrayList;
 import java.util.Arrays;
