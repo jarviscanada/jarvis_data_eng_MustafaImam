@@ -33,7 +33,7 @@ public class JavaGrepLambdaImp extends ca.jrvs.app.grep.JavaGrepImp {
             javaGrepLambdaImp.process();
         }
         catch (Exception ex) {
-            javaGrepLambdaImp.logger.error("Error: Unable to process", ex);
+            logger.error("Error: Unable to process", ex);
         }
     }
 
@@ -45,8 +45,11 @@ public class JavaGrepLambdaImp extends ca.jrvs.app.grep.JavaGrepImp {
     @Override
     public void process() throws IOException {
         List<String> matchedLines = new ArrayList<>();
+//        System.out.println("The above works!");
         Stream<File> filesStream = listFiles(getRootPath()).stream();
+//        System.out.println("The above works!");
         filesStream.forEach(file -> readLines(file).stream().filter(this::containsPattern).forEach(matchedLines::add) );
+
         writeToFile(matchedLines);
     }
 
@@ -62,12 +65,18 @@ public class JavaGrepLambdaImp extends ca.jrvs.app.grep.JavaGrepImp {
         List<File> fileList = new ArrayList<>(); // this is what we will return
         Path root = Paths.get(rootDir); // now we have the rootDir as a path object
         try (Stream<Path> stream = Files.walk(root)) {
-            stream.forEach(item -> fileList.add(item.toFile()));
+            stream.forEach(item -> {
+                File file = item.toFile();
+                if (file.isFile()) {
+                    fileList.add(file);
+                }
+            } );
         }
         catch ( IOException e) {
             logger.error("IOException!!!");
 
         }
+//        System.out.println("This is the filelist from listFiles: " + fileList);
         return fileList;
     }
 
@@ -88,6 +97,7 @@ public class JavaGrepLambdaImp extends ca.jrvs.app.grep.JavaGrepImp {
         List<String> allLines = new ArrayList<>();
         // Files lines: returns a stream of all the lines, with each line as a string in the stream
         try (Stream<String> lines = Files.lines(inputFile.toPath())) {
+//            System.out.println("stream lines" + lines);
             lines.forEach(line -> allLines.add(line));
         }
         catch (IOException e) {

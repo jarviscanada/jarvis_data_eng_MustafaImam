@@ -20,9 +20,9 @@ import org.apache.log4j.BasicConfigurator;
 
 
 
-public class JavaGrepImp implements JavaGrep {
+public class JavaGrepImp implements ca.jrvs.app.grep.JavaGrep {
 
-    final Logger logger = LoggerFactory.getLogger(JavaGrep.class);
+    final Logger logger = LoggerFactory.getLogger(ca.jrvs.app.grep.JavaGrep.class);
 
     private String regex;
     private String rootPath;
@@ -65,6 +65,7 @@ public class JavaGrepImp implements JavaGrep {
      * Top level search workflow
      * @throws IOException
      */
+    // works!
     @Override
     public void process() throws IOException {
         // Implementation of process method
@@ -76,6 +77,7 @@ public class JavaGrepImp implements JavaGrep {
                 }
             }
         }
+        System.out.println(matchedLines);
         writeToFile(matchedLines);
     }
 
@@ -85,8 +87,10 @@ public class JavaGrepImp implements JavaGrep {
      * @return files under the rootDir
      * return a list of all files in this directory
      */
+    // listFiles works!
     @Override
     public List<File> listFiles(String rootDir) {
+//        System.out.println(rootDir + "bruhh");
         List<File> fileList = new ArrayList<>();
         File directory = new File(rootDir);
         // Check if rootDir is a directory
@@ -94,9 +98,11 @@ public class JavaGrepImp implements JavaGrep {
 
             // Call the recursive function to add files to fileList
             addFilesToList(directory, fileList);
+//            System.out.println(fileList + " eberytime a file is added");
         } else {
             throw new IllegalArgumentException("The provided path is not a directory: " + rootDir);
         }
+//        System.out.println("the final result of the files " + fileList);
         return fileList;
 
     };
@@ -124,6 +130,8 @@ public class JavaGrepImp implements JavaGrep {
      * @throws IllegalArgumentException if a given inputFile is not a file
      * I have to find a way to go through every line somehow
      */
+
+    // readLine works!
     @Override
     public List<String> readLines(File inputFile) {
         if (!inputFile.isFile()) {
@@ -143,6 +151,7 @@ public class JavaGrepImp implements JavaGrep {
         catch ( IOException  e ) {
             logger.error("An I/O exception occurred", e);
         }
+//        System.out.println("returning the lines in a file: " + lines.get(1));
         return lines;
     };
 
@@ -151,6 +160,7 @@ public class JavaGrepImp implements JavaGrep {
      * @param line input string
      * @return true if there is a match
      */
+    // containsPattern works!
     @Override
     public boolean containsPattern(String line) {
 
@@ -158,7 +168,12 @@ public class JavaGrepImp implements JavaGrep {
             String patternString = this.getRegex();
             Pattern pattern = Pattern.compile(patternString);
             Matcher matcher = pattern.matcher(line);
-            return matcher.find();
+//            if (matcher.find() == true)
+//                --> want to use matcher.find() again but that looks for another match, and there may nt be
+//                System.out.println("Did you find: " + matcher.matches());
+//            }
+
+            return matcher.matches();
         }
         catch (PatternSyntaxException e) {
             logger.error("This pattern is throwing an error");
