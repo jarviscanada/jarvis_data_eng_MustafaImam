@@ -1,4 +1,4 @@
-package ca.jrvs.app.grep;
+package ca.jrvs.apps.grep;
 
 import java.io.*;
 import java.util.*;

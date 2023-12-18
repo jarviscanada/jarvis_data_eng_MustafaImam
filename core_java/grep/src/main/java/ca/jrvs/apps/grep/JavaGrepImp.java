@@ -1,4 +1,4 @@
-package ca.jrvs.app.grep;
+package ca.jrvs.apps.grep;
 
 import java.io.*;
 import java.util.*;
@@ -20,9 +20,9 @@ import org.apache.log4j.BasicConfigurator;
 
 
 
-public class JavaGrepImp implements ca.jrvs.app.grep.JavaGrep {
+public class JavaGrepImp implements ca.jrvs.apps.grep.JavaGrep {
 
-    final Logger logger = LoggerFactory.getLogger(ca.jrvs.app.grep.JavaGrep.class);
+    final Logger logger = LoggerFactory.getLogger(ca.jrvs.apps.grep.JavaGrep.class);
 
     private String regex;
     private String rootPath;
