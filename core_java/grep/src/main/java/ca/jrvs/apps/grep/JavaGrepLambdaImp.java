@@ -43,6 +43,7 @@ public class JavaGrepLambdaImp extends ca.jrvs.apps.grep.JavaGrepImp {
      * @throws IOException
      */
     @Override
+    
     public void process() throws IOException {
         List<String> matchedLines = new ArrayList<>();
 //        System.out.println("The above works!");
@@ -51,6 +52,7 @@ public class JavaGrepLambdaImp extends ca.jrvs.apps.grep.JavaGrepImp {
         filesStream.forEach(file -> readLines(file).stream().filter(this::containsPattern).forEach(matchedLines::add) );
 
         writeToFile(matchedLines);
+        
     }
 
     /**
